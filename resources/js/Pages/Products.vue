@@ -15,14 +15,17 @@
                         </div>
                       </div>
                     </div>
-                    <button @click="openModal()" dusk="form-create-provider" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3">
-                        Crear nuevo proveedor
+                    <button @click="openModal()" dusk="form-create-product" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3">
+                        Crear nuevo producto
                     </button>
                     <table class="table-fixed w-full">
                         <thead>
                             <tr class="bg-gray-100">
                                 <th class="px-4 py-2 w-20">No.</th>
                                 <th class="px-4 py-2">Nombre</th>
+                                <th class="px-4 py-2">Precio</th>
+                                <th class="px-4 py-2">Cantidad</th>
+                                <th class="px-4 py-2">Proveedor</th>
                                 <th class="px-4 py-2">Acciones</th>
                             </tr>
                         </thead>
@@ -30,6 +33,9 @@
                             <tr v-for="row in data" :key="row.id">
                                 <td class="border px-4 py-2">{{ row.id }}</td>
                                 <td class="border px-4 py-2">{{ row.name }}</td>
+                                <td class="border px-4 py-2">{{ row.preci }}</td>
+                                <td class="border px-4 py-2">{{ row.quantity }}</td>
+                                <td class="border px-4 py-2">{{ row.provider.name }}</td>
                                 <td class="border px-4 py-2 text-center">
                                     <button @click="edit(row)" dusk="form-update-provider" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</button>
                                     <button @click="deleteRow(row)" dusk="form-delete-provider" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
@@ -45,28 +51,48 @@
                         </div>
                         <!-- This element is to trick the browser into centering the modal contents. -->
                         <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>​
-                        <div id="modal-providers-form" class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                        <div id="modal-products-form" class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
                           <form>
                             <div class="bg-white px-4 pt-5 pb-2 sm:p-6 sm:pb-2">
-                              <h2>{{ editMode ? 'ACTUALIZAR ' : 'REGISTRAR' }} PROVEEDOR</h2>
+                              <h2>{{ editMode ? 'ACTUALIZAR ' : 'REGISTRAR' }} PRODUCTO</h2>
                             </div>
                           <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                             <div class="">
                                   <div class="mb-4">
                                       <label for="exampleFormControlInput1" class="block text-gray-700 text-sm font-bold mb-2">Nombre:</label>
-                                      <input type="text" dusk="provider-name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="exampleFormControlInput1" v-model="form.name">
-                                      <div v-if="$page.props.errors.name" class="text-red-500">{{ $page.props.errors.name }}</div>
+                                      <input type="text" dusk="product-name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="exampleFormControlInput1" v-model="form.name">
+                                      <div v-if="$page.props.errors.name" class="text-red-500">{{ $page.props.errors.name[0] }}</div>
+                                  </div>
+                                  <div class="mb-4">
+                                      <label for="exampleFormControlInput1" class="block text-gray-700 text-sm font-bold mb-2">Precio:</label>
+                                      <input type="text" dusk="product-price" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="exampleFormControlInput1" v-model="form.price">
+                                      <div v-if="$page.props.errors.price" class="text-red-500">{{ $page.props.errors.price[0] }}</div>
+                                  </div>
+                                  <div class="mb-4">
+                                      <label for="exampleFormControlInput1" class="block text-gray-700 text-sm font-bold mb-2">Cantidad:</label>
+                                      <input type="text" dusk="product-quantity" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="exampleFormControlInput1" v-model="form.quantity">
+                                      <div v-if="$page.props.errors.quantity" class="text-red-500">{{ $page.props.errors.quantity[0] }}</div>
+                                  </div>
+                                  <div class="mb-4">
+                                      <label for="exampleFormControlInput1" class="block text-gray-700 text-sm font-bold mb-2">Provedor:</label>
+                                      <select name="proveedor" dusk="product-provider" v-model="form.provider_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                          <option value=""></option>
+                                          <option v-for="provider of providers" :key="provider.id" :value="provider.id">
+                                              {{ provider.name }}
+                                          </option>
+                                      </select>
+                                      <div v-if="$page.props.errors.provider" class="text-red-500">{{ $page.props.errors.provider[0] }}</div>
                                   </div>
                             </div>
                           </div>
                           <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                             <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
-                              <button wire:click.prevent="store()" type="button" dusk="btn-manage-providers" class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-green-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5" v-if="!editMode" @click="save(form)">
+                              <button wire:click.prevent="store()" type="button" dusk="btn-manage-products" class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-green-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5" v-if="!editMode" @click="save(form)">
                                 Guardar
                               </button>
                             </span>
                             <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
-                              <button wire:click.prevent="store()" type="button" dusk="btn-manage-providers" class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-green-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5" v-if="editMode" @click="update(form)">
+                              <button wire:click.prevent="store()" type="button" dusk="btn-manage-products" class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-green-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5" v-if="editMode" @click="update(form)">
                                 Actualizar
                               </button>
                             </span>
@@ -95,13 +121,16 @@
             AppLayout,
             Welcome,
         },
-        props: ['data', 'errors'],
+        props: ['data', 'errors', 'providers'],
         data() {
             return {
                 editMode: false,
                 isOpen: false,
                 form: {
                     name: null,
+                    price: null,
+                    quantity: null,
+                    provider_id: null,
                 },
             }
         },
@@ -116,15 +145,19 @@
             },
             reset: function () {
                 this.form = {
-                    name: null
+                    name: null,
+                    price: null,
+                    quantity: null,
+                    provider_id: null,
                 }
             },
             save: function (data) {
-                let response = this.$inertia.post('/providers', data)
+                let response = this.$inertia.post('/products', data)
+                console.log('response:', response)
 
+                this.reset();
                 this.closeModal();
                 this.editMode = false;
-                this.reset();
             },
             edit: function (data) {
                 this.form = Object.assign({}, data);
@@ -133,14 +166,14 @@
             },
             update: function (data) {
                 data._method = 'PUT';
-                this.$inertia.post(`/providers/${data.id}`, data)
+                this.$inertia.post(`/products/${data.id}`, data)
                 this.reset();
                 this.closeModal();
             },
             deleteRow: function (data) {
                 if (!confirm('Are you sure want to remove?')) return;
                 data._method = 'DELETE';
-                this.$inertia.post(`/providers/${data.id}`, data)
+                this.$inertia.post(`/products/${data.id}`, data)
                 this.reset();
                 this.closeModal();
             }

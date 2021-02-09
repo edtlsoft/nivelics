@@ -17,7 +17,7 @@ class UsersCanUpdateProvidersTest extends DuskTestCase
     {
         $user = User::factory()->create();
 
-        $provider = Provider::factory()->create(['name' => 'Provider one']);
+        Provider::factory()->create(['name' => 'Provider one']);
 
         $this->browse(function (Browser $browser) use ($user) {
             $browser->loginAs($user)

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreProductRequest;
+use App\Models\Provider;
 
 class ProductController extends Controller
 {
@@ -15,7 +17,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Products', [
+            'data' => Product::latest()->with('provider')->get(),
+            'providers' => Provider::all()
+        ]);
     }
 
     /**

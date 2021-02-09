@@ -21,7 +21,10 @@
                                     Dashboard
                                 </jet-nav-link>
                                 <jet-nav-link :href="route('providers.index')" :active="route().current('providers.index')">
-                                    Providers
+                                    Proveedores
+                                </jet-nav-link>
+                                <jet-nav-link :href="route('products.index')" :active="route().current('products.index')">
+                                    Productos
                                 </jet-nav-link>
                             </div>
                         </div>

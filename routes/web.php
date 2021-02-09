@@ -36,7 +36,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::put('/providers/{provider}', [ProviderController::class, 'update'])->name('providers.update');
     Route::delete('/providers/{provider}', [ProviderController::class, 'destroy'])->name('providers.destroy');
 
-    // Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
     Route::post('/products', [ProductController::class, 'store'])->name('products.store');
     // Route::put('/products/{provider}', [ProductController::class, 'update'])->name('products.update');
     // Route::delete('/products/{provider}', [ProductController::class, 'destroy'])->name('products.destroy');

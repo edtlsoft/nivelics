@@ -18,7 +18,7 @@ class ProviderController extends Controller
     public function index()
     {
         return Inertia::render('Providers', [
-            'data' => Provider::latest()->get()
+            'data' => Provider::latest()->get(),
         ]);
     }
 
