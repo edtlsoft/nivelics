@@ -59,29 +59,29 @@
                           <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                             <div class="">
                                   <div class="mb-4">
-                                      <label for="exampleFormControlInput1" class="block text-gray-700 text-sm font-bold mb-2">Nombre:</label>
-                                      <input type="text" dusk="product-name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="exampleFormControlInput1" v-model="form.name">
-                                      <div v-if="$page.props.errors.name" class="text-red-500">{{ $page.props.errors.name[0] }}</div>
+                                      <label for="product-name" class="block text-gray-700 text-sm font-bold mb-2">Nombre:</label>
+                                      <input type="text" dusk="product-name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="product-name" v-model="form.name">
+                                      <div v-if="$page.props.errors.name" class="text-red-500">{{ $page.props.errors.name }}</div>
                                   </div>
                                   <div class="mb-4">
-                                      <label for="exampleFormControlInput1" class="block text-gray-700 text-sm font-bold mb-2">Precio:</label>
-                                      <input type="text" dusk="product-price" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="exampleFormControlInput1" v-model="form.price">
-                                      <div v-if="$page.props.errors.price" class="text-red-500">{{ $page.props.errors.price[0] }}</div>
+                                      <label for="product-price" class="block text-gray-700 text-sm font-bold mb-2">Precio:</label>
+                                      <input type="text" dusk="product-price" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="product-price" v-model="form.price">
+                                      <div v-if="$page.props.errors.price" class="text-red-500">{{ $page.props.errors.price }}</div>
                                   </div>
                                   <div class="mb-4">
-                                      <label for="exampleFormControlInput1" class="block text-gray-700 text-sm font-bold mb-2">Cantidad:</label>
-                                      <input type="text" dusk="product-quantity" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="exampleFormControlInput1" v-model="form.quantity">
-                                      <div v-if="$page.props.errors.quantity" class="text-red-500">{{ $page.props.errors.quantity[0] }}</div>
+                                      <label for="product-quantity" class="block text-gray-700 text-sm font-bold mb-2">Cantidad:</label>
+                                      <input type="text" dusk="product-quantity" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="product-quantity" v-model="form.quantity">
+                                      <div v-if="$page.props.errors.quantity" class="text-red-500">{{ $page.props.errors.quantity }}</div>
                                   </div>
                                   <div class="mb-4">
-                                      <label for="exampleFormControlInput1" class="block text-gray-700 text-sm font-bold mb-2">Provedor:</label>
-                                      <select name="proveedor" dusk="product-provider" v-model="form.provider_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                      <label for="product-provider" class="block text-gray-700 text-sm font-bold mb-2">Provedor:</label>
+                                      <select dusk="product-provider" v-model="form.provider_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="product-provider">
                                           <option value=""></option>
                                           <option v-for="provider of providers" :key="provider.id" :value="provider.id">
                                               {{ provider.name }}
                                           </option>
                                       </select>
-                                      <div v-if="$page.props.errors.provider" class="text-red-500">{{ $page.props.errors.provider[0] }}</div>
+                                      <div v-if="$page.props.errors.provider" class="text-red-500">{{ $page.props.errors.provider }}</div>
                                   </div>
                             </div>
                           </div>

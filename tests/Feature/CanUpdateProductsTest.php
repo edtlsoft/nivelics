@@ -82,24 +82,4 @@ class CanUpdateProductsTest extends TestCase
 
         $response->assertJsonStructure(['message', 'errors' => ['name']]);
     }
-
-    /** @test */
-    public function a_product_name_must_be_unique()
-    {
-        // Given
-        $user = User::factory()->create();
-
-        $product = Product::factory()->create(['name' => 'Product one']);
-
-        // When
-        $response = $this->actingAs($user)->putJson(
-            route('products.update', $product), 
-            ['name' => $product->name]
-        );
-
-        // Then
-        $response->assertStatus(422);
-
-        $response->assertJsonStructure(['message', 'errors' => ['name']]);
-    }
 }
