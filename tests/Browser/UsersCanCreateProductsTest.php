@@ -37,6 +37,9 @@ class UsersCanCreateProductsTest extends DuskTestCase
                 ->assertSee('El producto se registro correctamente.')
                 ->waitForText('product_number_one')
                 ->assertSee('product_number_one')
+                ->assertSee('15000.5')
+                ->assertSee('145')
+                ->assertSee('Provider one')
                 ;
         });
     }

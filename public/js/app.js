@@ -33463,7 +33463,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "border px-4 py-2" }, [
-                        _vm._v(_vm._s(row.preci))
+                        _vm._v(_vm._s(row.price))
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "border px-4 py-2" }, [
@@ -33483,7 +33483,7 @@ var render = function() {
                             {
                               staticClass:
                                 "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded",
-                              attrs: { dusk: "form-update-provider" },
+                              attrs: { dusk: "form-update-product" },
                               on: {
                                 click: function($event) {
                                   return _vm.edit(row)
@@ -33498,7 +33498,7 @@ var render = function() {
                             {
                               staticClass:
                                 "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded",
-                              attrs: { dusk: "form-delete-provider" },
+                              attrs: { dusk: "form-delete-product" },
                               on: {
                                 click: function($event) {
                                   return _vm.deleteRow(row)

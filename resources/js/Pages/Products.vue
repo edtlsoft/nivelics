@@ -33,12 +33,12 @@
                             <tr v-for="row in data" :key="row.id">
                                 <td class="border px-4 py-2">{{ row.id }}</td>
                                 <td class="border px-4 py-2">{{ row.name }}</td>
-                                <td class="border px-4 py-2">{{ row.preci }}</td>
+                                <td class="border px-4 py-2">{{ row.price }}</td>
                                 <td class="border px-4 py-2">{{ row.quantity }}</td>
                                 <td class="border px-4 py-2">{{ row.provider.name }}</td>
                                 <td class="border px-4 py-2 text-center">
-                                    <button @click="edit(row)" dusk="form-update-provider" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</button>
-                                    <button @click="deleteRow(row)" dusk="form-delete-provider" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
+                                    <button @click="edit(row)" dusk="form-update-product" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</button>
+                                    <button @click="deleteRow(row)" dusk="form-delete-product" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
                                 </td>
                             </tr>
                         </tbody>
