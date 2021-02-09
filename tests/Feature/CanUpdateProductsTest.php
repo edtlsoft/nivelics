@@ -31,6 +31,7 @@ class CanUpdateProductsTest extends TestCase
                 'name' => 'Product updated',
                 'price' => '6000.50',
                 'quantity' => '150',
+                'provider_id' => $product->provider_id
             ]
         );
 
@@ -43,16 +44,16 @@ class CanUpdateProductsTest extends TestCase
     }
 
     /** @test */
-    public function a_provider_requires_a_name()
+    public function a_product_requires_a_name()
     {
         // Given
         $user = User::factory()->create();
 
-        $provider = Product::factory()->create(['name' => 'Product one']);
+        $product = Product::factory()->create(['name' => 'Product one']);
 
         // When
         $response = $this->actingAs($user)->putJson(
-            route('products.update', $provider), 
+            route('products.update', $product), 
             []
         );
 
@@ -63,16 +64,16 @@ class CanUpdateProductsTest extends TestCase
     }
 
     /** @test */
-    public function a_provider_name_requires_a_minimum_length()
+    public function a_product_name_requires_a_minimum_length()
     {
         // Given
         $user = User::factory()->create();
 
-        $provider = Product::factory()->create(['name' => 'Product one']);
+        $product = Product::factory()->create(['name' => 'Product one']);
 
         // When
         $response = $this->actingAs($user)->putJson(
-            route('products.update', $provider), 
+            route('products.update', $product), 
             ['name' => 'one']
         );
         
@@ -83,17 +84,17 @@ class CanUpdateProductsTest extends TestCase
     }
 
     /** @test */
-    public function a_provider_name_must_be_unique()
+    public function a_product_name_must_be_unique()
     {
         // Given
         $user = User::factory()->create();
 
-        $provider = Product::factory()->create(['name' => 'Product one']);
+        $product = Product::factory()->create(['name' => 'Product one']);
 
         // When
         $response = $this->actingAs($user)->putJson(
-            route('products.update', $provider), 
-            ['name' => $provider->name]
+            route('products.update', $product), 
+            ['name' => $product->name]
         );
 
         // Then
