@@ -3,6 +3,7 @@
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProviderController;
 
 /*
@@ -34,6 +35,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::post('/providers', [ProviderController::class, 'store'])->name('providers.store');
     Route::put('/providers/{provider}', [ProviderController::class, 'update'])->name('providers.update');
     Route::delete('/providers/{provider}', [ProviderController::class, 'destroy'])->name('providers.destroy');
+
+    // Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+    Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+    // Route::put('/products/{provider}', [ProductController::class, 'update'])->name('products.update');
+    // Route::delete('/products/{provider}', [ProductController::class, 'destroy'])->name('products.destroy');
 });
 
 
