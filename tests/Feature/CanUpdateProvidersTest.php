@@ -3,27 +3,30 @@
 namespace Tests\Feature;
 
 use App\Models\Provider;
+use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 
-class CanCreateProvidersTest extends TestCase
+class CanUpdateProvidersTest extends TestCase
 {
     use RefreshDatabase;
 
     /** @test */
-    public function an_authenticated_user_can_create_providers()
+    public function an_authenticated_user_can_update_providers()
     {        
         // Given
         $user = User::factory()->create();
 
-        $provider = ['name' => 'Provider name'];
+        $provider = Provider::factory()->create(['name' => 'Provider one']);
 
         // When
-        $this->actingAs($user)->postJson(route('providers.store'), $provider);
+        $this->actingAs($user)->putJson(
+            route('providers.update', $provider), 
+            ['name' => 'Provider updated']
+        );
 
         // Then
-        $this->assertDatabaseHas('providers', $provider);
+        $this->assertDatabaseHas('providers', ['name' => 'Provider updated']);
     }
 
     /** @test */
@@ -32,8 +35,13 @@ class CanCreateProvidersTest extends TestCase
         // Given
         $user = User::factory()->create();
 
+        $provider = Provider::factory()->create(['name' => 'Provider one']);
+
         // When
-        $response = $this->actingAs($user)->postJson(route('providers.store'), []);
+        $response = $this->actingAs($user)->putJson(
+            route('providers.update', $provider), 
+            []
+        );
 
         // Then
         $response->assertStatus(422);
@@ -47,10 +55,13 @@ class CanCreateProvidersTest extends TestCase
         // Given
         $user = User::factory()->create();
 
+        $provider = Provider::factory()->create(['name' => 'Provider one']);
+
         // When
-        $response = $this->actingAs($user)->postJson(route('providers.store'), [
-            'name' => 'one',
-        ]);
+        $response = $this->actingAs($user)->putJson(
+            route('providers.update', $provider), 
+            ['name' => 'one']
+        );
         
         // Then
         $response->assertStatus(422);
@@ -64,12 +75,13 @@ class CanCreateProvidersTest extends TestCase
         // Given
         $user = User::factory()->create();
 
-        $provider = Provider::factory()->create();
+        $provider = Provider::factory()->create(['name' => 'Provider one']);
 
         // When
-        $response = $this->actingAs($user)->postJson(route('providers.store'), [
-            'name' => $provider->name
-        ]);
+        $response = $this->actingAs($user)->putJson(
+            route('providers.update', $provider), 
+            ['name' => $provider->name]
+        );
 
         // Then
         $response->assertStatus(422);
