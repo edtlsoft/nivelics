@@ -57,6 +57,8 @@ class ProviderController extends Controller
      */
     public function destroy(Provider $provider)
     {
-        //
+        $provider->delete();
+
+        return redirect()->back()->with('message', 'El proveedor se elimino correctamente.');
     }
 }
