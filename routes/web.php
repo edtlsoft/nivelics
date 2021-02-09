@@ -29,5 +29,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
 
+Route::middleware(['auth:sanctum', 'verified'])->group(function(){
+    Route::get('/providers', [ProviderController::class, 'index'])->name('providers.index');
+    Route::post('/providers', [ProviderController::class, 'store'])->name('providers.store');
+});
 
-Route::post('/providers', [ProviderController::class, 'store'])->name('providers.store');
+

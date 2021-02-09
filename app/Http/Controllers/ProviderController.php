@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use App\Models\Provider;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreProviderRequest;
@@ -15,7 +16,9 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Providers', [
+            'data' => Provider::latest()->get()
+        ]);
     }
 
     /**
@@ -36,7 +39,9 @@ class ProviderController extends Controller
      */
     public function store(StoreProviderRequest $request)
     {
-        return Provider::create($request->only(['name']));
+        Provider::create($request->only(['name']));
+
+        return redirect()->back()->with('message', 'El proveedor se registro correctamente.');
     }
 
     /**

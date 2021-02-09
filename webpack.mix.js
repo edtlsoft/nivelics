@@ -22,3 +22,10 @@ mix.js('resources/js/app.js', 'public/js').vue()
 if (mix.inProduction()) {
     mix.version();
 }
+
+if (process.env.npm_config_browser_sync) {
+    mix.browserSync({
+        proxy: 'http://pruebatecnica.test',
+        open: true,
+    });
+}
