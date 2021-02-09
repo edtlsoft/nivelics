@@ -5281,14 +5281,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     update: function update(data) {
       data._method = 'PUT';
-      this.$inertia.post('/posts/' + data.id, data);
+      this.$inertia.post("/providers/".concat(data.id), data);
       this.reset();
       this.closeModal();
     },
     deleteRow: function deleteRow(data) {
       if (!confirm('Are you sure want to remove?')) return;
       data._method = 'DELETE';
-      this.$inertia.post('/posts/' + data.id, data);
+      this.$inertia.post("/providers/".concat(data.id), data);
       this.reset();
       this.closeModal();
     }
@@ -34458,6 +34458,7 @@ var render = function() {
                             {
                               staticClass:
                                 "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded",
+                              attrs: { dusk: "form-update-provider" },
                               on: {
                                 click: function($event) {
                                   return _vm.edit(row)
@@ -34472,6 +34473,7 @@ var render = function() {
                             {
                               staticClass:
                                 "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded",
+                              attrs: { dusk: "form-delete-provider" },
                               on: {
                                 click: function($event) {
                                   return _vm.deleteRow(row)
@@ -34638,36 +34640,31 @@ var render = function() {
                                           "flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto"
                                       },
                                       [
-                                        _c(
-                                          "button",
-                                          {
-                                            directives: [
+                                        !_vm.editMode
+                                          ? _c(
+                                              "button",
                                               {
-                                                name: "show",
-                                                rawName: "v-show",
-                                                value: !_vm.editMode,
-                                                expression: "!editMode"
-                                              }
-                                            ],
-                                            staticClass:
-                                              "inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-green-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5",
-                                            attrs: {
-                                              "wire:click.prevent": "store()",
-                                              type: "button",
-                                              dusk: "btn-manage-providers"
-                                            },
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.save(_vm.form)
-                                              }
-                                            }
-                                          },
-                                          [
-                                            _vm._v(
-                                              "\n                            Guardar\n                          "
+                                                staticClass:
+                                                  "inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-green-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5",
+                                                attrs: {
+                                                  "wire:click.prevent":
+                                                    "store()",
+                                                  type: "button",
+                                                  dusk: "btn-manage-providers"
+                                                },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.save(_vm.form)
+                                                  }
+                                                }
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                            Guardar\n                          "
+                                                )
+                                              ]
                                             )
-                                          ]
-                                        )
+                                          : _vm._e()
                                       ]
                                     ),
                                     _vm._v(" "),
@@ -34678,36 +34675,31 @@ var render = function() {
                                           "flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto"
                                       },
                                       [
-                                        _c(
-                                          "button",
-                                          {
-                                            directives: [
+                                        _vm.editMode
+                                          ? _c(
+                                              "button",
                                               {
-                                                name: "show",
-                                                rawName: "v-show",
-                                                value: _vm.editMode,
-                                                expression: "editMode"
-                                              }
-                                            ],
-                                            staticClass:
-                                              "inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-green-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5",
-                                            attrs: {
-                                              "wire:click.prevent": "store()",
-                                              type: "button",
-                                              dusk: "btn-manage-providers"
-                                            },
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.update(_vm.form)
-                                              }
-                                            }
-                                          },
-                                          [
-                                            _vm._v(
-                                              "\n                            Actualizar\n                          "
+                                                staticClass:
+                                                  "inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-green-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5",
+                                                attrs: {
+                                                  "wire:click.prevent":
+                                                    "store()",
+                                                  type: "button",
+                                                  dusk: "btn-manage-providers"
+                                                },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.update(_vm.form)
+                                                  }
+                                                }
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                            Actualizar\n                          "
+                                                )
+                                              ]
                                             )
-                                          ]
-                                        )
+                                          : _vm._e()
                                       ]
                                     ),
                                     _vm._v(" "),

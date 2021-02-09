@@ -46,7 +46,7 @@ class ProviderController extends Controller
     {
         $provider->update($request->only(['name']));
 
-        return redirect()->back()->with('message', 'El proveedor se registro correctamente.');
+        return redirect()->back()->with('message', 'El proveedor se actualizo correctamente.');
     }
 
     /**

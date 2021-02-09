@@ -31,8 +31,8 @@
                                 <td class="border px-4 py-2">{{ row.id }}</td>
                                 <td class="border px-4 py-2">{{ row.name }}</td>
                                 <td class="border px-4 py-2 text-center">
-                                    <button @click="edit(row)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</button>
-                                    <button @click="deleteRow(row)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
+                                    <button @click="edit(row)" dusk="form-update-provider" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</button>
+                                    <button @click="deleteRow(row)" dusk="form-delete-provider" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -61,12 +61,12 @@
                           </div>
                           <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                             <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
-                              <button wire:click.prevent="store()" type="button" dusk="btn-manage-providers" class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-green-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5" v-show="!editMode" @click="save(form)">
+                              <button wire:click.prevent="store()" type="button" dusk="btn-manage-providers" class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-green-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5" v-if="!editMode" @click="save(form)">
                                 Guardar
                               </button>
                             </span>
                             <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
-                              <button wire:click.prevent="store()" type="button" dusk="btn-manage-providers" class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-green-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5" v-show="editMode" @click="update(form)">
+                              <button wire:click.prevent="store()" type="button" dusk="btn-manage-providers" class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-green-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5" v-if="editMode" @click="update(form)">
                                 Actualizar
                               </button>
                             </span>
@@ -136,14 +136,14 @@
             },
             update: function (data) {
                 data._method = 'PUT';
-                this.$inertia.post('/posts/' + data.id, data)
+                this.$inertia.post(`/providers/${data.id}`, data)
                 this.reset();
                 this.closeModal();
             },
             deleteRow: function (data) {
                 if (!confirm('Are you sure want to remove?')) return;
                 data._method = 'DELETE';
-                this.$inertia.post('/posts/' + data.id, data)
+                this.$inertia.post(`/providers/${data.id}`, data)
                 this.reset();
                 this.closeModal();
             }
